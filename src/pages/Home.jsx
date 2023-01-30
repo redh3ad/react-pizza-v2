@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import axios, { all } from 'axios';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -26,12 +27,13 @@ export default function Home() {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(
-      `https://630fb35336e6a2a04ee0239b.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setItems(json);
+    axios
+      .get(
+        `https://630fb35336e6a2a04ee0239b.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
+      )
+      .then((res) => {
+        const allPizzas = res.data;
+        setItems(allPizzas);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
