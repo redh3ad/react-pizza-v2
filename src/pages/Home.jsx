@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios, { all } from 'axios';
+import axios from 'axios';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
