@@ -12,10 +12,10 @@ export default function PizzaBlock({ title, price, imageUrl, sizes, types }) {
         <h4 className='pizza-block__title'>{title}</h4>
         <div className='pizza-block__selector'>
           <ul>
-            {types.map((typeId) => (
+            {types.map((typeId, index) => (
               <li
                 onClick={() => setActiveType(typeId)}
-                className={activeType === typeId ? 'active' : ''}
+                className={activeType === index ? 'active' : ''}
                 key={typeId}>
                 {typeNames[typeId]}
               </li>
