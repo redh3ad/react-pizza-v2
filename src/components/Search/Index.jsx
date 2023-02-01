@@ -1,9 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback, useState, useRef } from 'react';
 import styles from './Search.module.scss';
 import { SearchContext } from '../../App';
+import debounce from 'lodash.debounce';
 
 export default function Search() {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState('');
+  const { setSearchValue } = useContext(SearchContext);
+  const inputRef = useRef();
+
+  const onClickClear = () => {
+    inputRef.current.focus();
+    setSearchValue('');
+    setValue('');
+  };
+
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 500),
+    [],
+  );
+
+  const onChangeInput = (e) => {
+    setValue(e.target.value);
+    updateSearchValue(e.target.value);
+  };
 
   return (
     <div className={styles.root}>
@@ -20,14 +41,15 @@ export default function Search() {
         />
       </svg>
       <input
-        value={searchValue}
+        ref={inputRef}
+        value={value}
         className={styles.input}
         placeholder='Поиск пиццы...'
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={onChangeInput}
       />
-      {searchValue && (
+      {value && (
         <svg
-          onClick={() => setSearchValue('')}
+          onClick={onClickClear}
           className={styles.clearIcon}
           height='14px'
           version='1.1'
@@ -39,10 +61,10 @@ export default function Search() {
           <defs />
           <g
             fill='none'
-            fill-rule='evenodd'
+            fillRule='evenodd'
             id='Page-1'
             stroke='none'
-            stroke-width='1'>
+            strokeWidth='1'>
             <g
               fill='#000000'
               id='Core'
