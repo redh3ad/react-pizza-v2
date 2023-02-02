@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useMemo } from 'react';
 import styles from './Search.module.scss';
 import { SearchContext } from '../../App';
 import debounce from 'lodash.debounce';
@@ -14,11 +14,12 @@ export default function Search() {
     setValue('');
   };
 
-  const updateSearchValue = useCallback(
-    debounce((str) => {
-      setSearchValue(str);
-    }, 500),
-    [],
+  const updateSearchValue = useMemo(
+    () =>
+      debounce((str) => {
+        setSearchValue(str);
+      }, 500),
+    [setSearchValue],
   );
 
   const onChangeInput = (e) => {
