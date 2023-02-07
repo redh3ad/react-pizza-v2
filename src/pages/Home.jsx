@@ -1,13 +1,14 @@
-import React, { useEffect, useContext, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  selectFilter,
   setCategoryId,
   setCurrentPage,
   setFilters,
 } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 import NotFound from './NotFound';
 
 import Categories from '../components/Categories';
@@ -19,16 +20,13 @@ import { SearchContext } from '../App';
 import { useRef } from 'react';
 
 export default function Home() {
-  const { currentPage, categoryId, sort } = useSelector(
-    (state) => state.filter,
-  );
-  const { items, status } = useSelector((state) => state.pizza);
+  const { currentPage, categoryId, sort, searchValue } =
+    useSelector(selectFilter);
+  const { items, status } = useSelector(selectPizzaData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-
-  const { searchValue } = useContext(SearchContext);
 
   const onClickCategory = useCallback((id) => {
     dispatch(setCategoryId(id));
