@@ -7,7 +7,6 @@ import React from 'react';
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
-  console.log(items);
   const totalCount = items.reduce(
     (sum: number, item: any) => sum + item.count,
     0,
