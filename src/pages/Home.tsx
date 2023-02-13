@@ -17,7 +17,7 @@ import {
 import NotFound from './NotFound';
 
 import Categories from '../components/Categories';
-import Sort, { sortList } from '../components/Sort';
+import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
@@ -104,7 +104,7 @@ const Home: React.FC = () => {
     <div className='container'>
       <div className='content__top'>
         <Categories value={categoryId} onClickCategory={onClickCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className='content__title'>Все пиццы</h2>
       {status === 'error' ? (
