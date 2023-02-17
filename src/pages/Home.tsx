@@ -1,6 +1,4 @@
 import React, { useEffect, useCallback } from 'react';
-import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import {
@@ -12,7 +10,6 @@ import {
   NotFound,
 } from '../components';
 
-import { useRef } from 'react';
 import { useAppDispatch } from '../redux/store';
 import { selectPizzaData } from '../redux/slices/pizza/selectors';
 import { selectFilter } from '../redux/slices/filter/selectors';
@@ -23,10 +20,7 @@ const Home: React.FC = () => {
   const { currentPage, categoryId, sort, searchValue } =
     useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isSearch = useRef<boolean>(false);
-  const isMounted = useRef<boolean>(false);
 
   const onClickCategory = useCallback((idx: number) => {
     dispatch(setCategoryId(idx));
@@ -46,42 +40,6 @@ const Home: React.FC = () => {
 
     window.scrollTo(0, 0);
   };
-
-  // useEffect(() => {
-  //   if (isMounted.current) {
-  //     const queryString = qs.stringify({
-  //       categoryId: categoryId > 0 ? categoryId : null,
-  //       sortProperty: sort.sortProperty,
-  //       currentPage,
-  //     });
-  //     navigate(`?${queryString}`);
-  //   }
-
-  //   if (!window.location.search) {
-  //     dispatch(fetchPizzas({} as FetchPizzaParams));
-  //   }
-  //   isMounted.current = true;
-  // }, [categoryId, currentPage, sort.sortProperty, navigate]);
-
-  // useEffect(() => {
-  //   if (window.location.search) {
-  //     const params = qs.parse(
-  //       window.location.search.substring(1),
-  //     ) as unknown as FetchPizzaParams;
-  //     const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
-
-  //     dispatch(
-  //       setFilters({
-  //         searchValue: params.search,
-  //         currentPage: Number(params.currentPage),
-  //         categoryId: Number(params.category),
-  //         sort: sort || sortList[0],
-  //       }),
-  //     );
-
-  //     isSearch.current = true;
-  //   }
-  // }, []);
 
   useEffect(() => {
     getPizzas();
