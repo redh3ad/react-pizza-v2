@@ -2,18 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  FilterSliceState,
-  selectFilter,
-  setCategoryId,
-  setCurrentPage,
-  setFilters,
-} from '../redux/slices/filterSlice';
-import {
-  FetchPizzaParams,
-  fetchPizzas,
-  selectPizzaData,
-} from '../redux/slices/pizzaSlice';
+
 import NotFound from './NotFound';
 
 import Categories from '../components/Categories';
@@ -24,6 +13,10 @@ import Pagination from '../components/Pagination';
 
 import { useRef } from 'react';
 import { useAppDispatch } from '../redux/store';
+import { selectPizzaData } from '../redux/slices/pizza/selectors';
+import { selectFilter } from '../redux/slices/filter/selectors';
+import { setCategoryId, setCurrentPage } from '../redux/slices/filter/slice';
+import { fetchPizzas } from '../redux/slices/pizza/asyncActions';
 
 const Home: React.FC = () => {
   const { currentPage, categoryId, sort, searchValue } =

@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect, memo } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSort, TSortItem } from '../redux/slices/filterSlice';
+import { setSort } from '../redux/slices/filter/slice';
+import { TSortItem } from '../redux/slices/filter/types';
 
 export const sortList: TSortItem[] = [
   { name: 'популярности (DESC)', sortProperty: 'rating' },
