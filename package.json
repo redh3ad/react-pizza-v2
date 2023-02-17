@@ -2,6 +2,7 @@
   "name": "react-pizza-v2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://redh3ad.github.io/react-pizza-v2",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.16.5",
