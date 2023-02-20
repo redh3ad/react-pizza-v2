@@ -4,12 +4,12 @@ import { setSort } from '../redux/slices/filter/slice';
 import { TSortItem } from '../redux/slices/filter/types';
 
 export const sortList: TSortItem[] = [
-  { name: 'популярности (DESC)', sortProperty: 'rating' },
-  { name: 'популярности (ASC)', sortProperty: '-rating' },
-  { name: 'цене (DESC)', sortProperty: 'price' },
-  { name: 'цене (ASC)', sortProperty: '-price' },
-  { name: 'алфавиту (DESC)', sortProperty: 'title' },
-  { name: 'алфавиту (ASC)', sortProperty: '-title' },
+  { name: 'популярности (↑)', sortProperty: 'rating' },
+  { name: 'популярности (↓)', sortProperty: '-rating' },
+  { name: 'цене (↑)', sortProperty: 'price' },
+  { name: 'цене (↓)', sortProperty: '-price' },
+  { name: 'алфавиту (↑)', sortProperty: 'title' },
+  { name: 'алфавиту (↓)', sortProperty: '-title' },
 ];
 
 type SortProps = { value: TSortItem };
