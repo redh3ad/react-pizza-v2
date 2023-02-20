@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { selectCartItemById } from '../redux/slices/cart/selectors';
 import { addItem } from '../redux/slices/cart/slice';
 import { TCartItem } from '../redux/slices/cart/types';
+import FullPizzaSkeleton from './FullPizzaSkeleton';
 
 const typeNames: string[] = ['тонкое', 'традиционные'];
 
@@ -43,7 +44,7 @@ const FullPizza: React.FC = () => {
   }, []);
 
   if (!pizza) {
-    return <>Loading...</>;
+    return <FullPizzaSkeleton></FullPizzaSkeleton>;
   }
 
   const onClickAdd = () => {
